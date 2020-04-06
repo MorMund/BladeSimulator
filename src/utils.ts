@@ -24,3 +24,7 @@ export function getCenter(rect: Rectangle): Point {
         rect.x + (rect.width / 2),
         rect.y + (rect.height / 2));
 }
+
+export function normalizeAngle(angle: number): number {
+    return Math.atan2(Math.sin(angle), Math.cos(angle));
+}

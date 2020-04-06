@@ -1,5 +1,5 @@
 import { AnimatedSprite, Container, Spritesheet, Point, Sprite } from "pixi.js";
-import { toFullLoopAnim, getCenter } from "./utils";
+import { toFullLoopAnim, getCenter, getAngleBetweenPoints, normalizeAngle } from "./utils";
 import { Entity } from "./Entity";
 import { Projectile } from "./Projectile";
 import { DamageText } from "./DamageText";
@@ -89,15 +89,25 @@ export class Gnome extends Entity {
     }
 
     public cast(spellName: SpellName): Boolean {
-        if(!!this.currentCast) {
+        if (!!this.currentCast) {
             return;
         }
 
+        const angleToTarget = getAngleBetweenPoints(
+            getCenter(this.target.getContainer().getBounds()),
+            getCenter(this.container.getBounds()));
+
+        const normalAngle = normalizeAngle(this.container.rotation);
+        const facingAngle = Math.abs(normalAngle - angleToTarget);
         let isSuccessful = true;
         if (this.currentGC !== 0) {
             isSuccessful = false;
         } else if (this.cooldowns.has(spellName)) {
             isSuccessful = this.cooldowns.get(spellName) === 0;
+        }
+
+        if (spellName !== "Blink" && facingAngle > 1) {
+            isSuccessful = false;
         }
 
         if (isSuccessful) {
@@ -136,8 +146,8 @@ export class Gnome extends Entity {
         return this.cooldowns;
     }
 
-    public getCurrentCast(): {name: SpellName, castTime: number, spellCastTime: number} {
-        if(!this.currentCast) {
+    public getCurrentCast(): { name: SpellName, castTime: number, spellCastTime: number } {
+        if (!this.currentCast) {
             return undefined;
         }
 
@@ -155,34 +165,42 @@ export class Gnome extends Entity {
             const cast = this.currentCast;
             const spell = this.spells.get(cast.spell);
             cast.castTime = Math.max(0, cast.castTime - deltaS);
+            const angleToTarget = getAngleBetweenPoints(
+                getCenter(this.target.getContainer().getBounds()),
+                getCenter(this.container.getBounds()));
+            const normalAngle = normalizeAngle(this.container.rotation);
+
+            const facingAngle = Math.abs(normalAngle - angleToTarget);
             if (cast.castTime === 0) {
                 this.currentCast = null;
                 const variance = (Math.random() - 0.5) * 2;
                 const isCrit = (Math.random() < this.critChange);
                 const critMultiply = isCrit ? 2 : 1;
                 const castDamage = spell.damage + variance * spell.damageVariance * critMultiply;
-                if (spell.name === "Blink") {
-                    this.moveInDirection(100, 1);
-                } else if (spell.name === "Fireball" || spell.name === "Pyroblast") {
-                    this.addEntity(new Projectile({
-                        target: this.target,
-                        damage: castDamage,
-                        origin: getCenter(this.container.getBounds()),
-                        speed: 3,
-                        sprite: this.fireballSprite,
-                        isCrit: isCrit
+
+                if (spell.name !== "Blink" && facingAngle > 1) {
+                    this.currentCast = null;
+                } else {
+
+                    if (spell.name === "Blink") {
+                        this.moveInDirection(100, 1);
+                    } else if (spell.name === "Fireball" || spell.name === "Pyroblast") {
+                        this.addEntity(new Projectile({
+                            target: this.target,
+                            damage: castDamage,
+                            origin: getCenter(this.container.getBounds()),
+                            speed: 3,
+                            sprite: this.fireballSprite,
+                            isCrit: isCrit
+                        }
+                        ));
+                    } else if (spell.name === "Scorch" || spell.name === "Fire Blast") {
+                        this.target.damage(castDamage, isCrit);
                     }
-                    ));
-                } else if(spell.name === "Scorch" || spell.name === "Fire Blast") {
-                    this.target.damage(castDamage, isCrit);
+
+                    this.cooldowns.set(spell.name, spell.cooldown);
                 }
-
-                this.cooldowns.set(spell.name, spell.cooldown);
             }
-        }
-
-        if (this.movement !== Movement.None) {
-            this.currentCast = null;
         }
 
         if ((this.movement & Movement.Left) === Movement.Left) {
@@ -195,10 +213,12 @@ export class Gnome extends Entity {
         let movementDirection = 0;
 
         if ((this.movement & Movement.Forward) === Movement.Forward) {
+            this.currentCast = null;
             movementDirection = 1;
         }
 
         if ((this.movement & Movement.Backward) === Movement.Backward) {
+            this.currentCast = null;
             movementDirection = -0.3;
         }
 
