@@ -1,45 +1,77 @@
-import { Spritesheet, AnimatedSprite, Container, Point, DisplayObject } from "pixi.js";
-import { toFullLoopAnim } from "./utils";
+import { Spritesheet, AnimatedSprite, Container, Point } from "pixi.js";
+import { toFullLoopAnim, getCenter, getAngleBetweenPoints } from "./utils";
+import { Entity } from "./Entity";
 
-export class Princess {
+export class Princess extends Entity {
     private animations = new Map<string, AnimatedSprite>();
     private container: Container;
-    private target: DisplayObject;
+    private target: Entity;
+    private health = 5000;
+    private isAttacking = false;
+    private movementSpeed = 1;
 
     constructor(spritesheet: Spritesheet) {
+        super();
         this.container = new Container();
         this.container.scale = new Point(0.2, 0.2);
-        const walk = this.completeWalkCycle(spritesheet.animations.walk);
-        this.animations.set("walk",  walk);
+        this.animations.set("walk",  toFullLoopAnim(spritesheet.animations.walk));
+        this.animations.set("attack", toFullLoopAnim(spritesheet.animations.attack));
         this.animations.set("fart", new AnimatedSprite(spritesheet.animations.fart));
         this.animations.set("idle", new AnimatedSprite(spritesheet.animations.idle));
+        this.animations.set("death",  new AnimatedSprite(spritesheet.animations.death));
         this.animations.forEach(element => {
+            element.animationSpeed = 0.05;
+            element.anchor.set(0.5);
             element.visible = false;
             element.play();
             this.container.addChild(element);
         });
 
-        walk.animationSpeed = 0.05;
-        walk.visible = true;
+        this.selectAnimation("walk");
+        this.animations.get("attack").onLoop = () => {
+            this.isAttacking = false;
+            const attackAnim =  this.animations.get("attack");
+            attackAnim.stop();
+            this.target.damage(300);
+        };
     }
 
-    public addToStage(stage: Container): void {
-        stage.addChild(this.container);
+    public getContainer(): Container {
+        return this.container;
     }
 
-    public setTarget(target: DisplayObject): void {
+    private selectAnimation(animation: string) {
+        this.animations.forEach((animEntry, name) => animEntry.visible = (name === animation));
+    }
+
+    public setTarget(target: Entity): void {
         this.target = target;
     }
 
-    public update(): void {
-        const deltaX = this.target.x - this.container.x;
-        const deltaY = this.target.y - this.container.y;
-
-        this.container.x += Math.max(Math.min(deltaX, 1), -1);
-        this.container.y += Math.max(Math.min(deltaY, 1), -1);
+    public damage(damage: number): void {
+        this.health -= damage;
+        console.log("Boss Health: " + this.health);
     }
 
-    private completeWalkCycle(walkAnim: any): any {
-       return toFullLoopAnim(walkAnim);
+    public update(delta: number): void {
+        if(this.target !== undefined && !this.isAttacking) {
+            this.selectAnimation("walk");
+            const targetCenter = getCenter(this.target.getContainer().getBounds());
+            const selfCenter = getCenter(this.container.getBounds());
+
+            const distX = selfCenter.x - targetCenter.x;
+            const distY = selfCenter.y - targetCenter.y;
+            const distance = Math.sqrt((distX * distX) + (distY * distY));
+
+            this.container.rotation = getAngleBetweenPoints(targetCenter, selfCenter);
+            if(distance > 50) {
+                this.moveInDirection(this.movementSpeed, delta);
+            } else {
+                this.isAttacking = true;
+                const attackAnim =  this.animations.get("attack");
+                attackAnim.play();
+                this.selectAnimation("attack");
+            }
+        }
     }
 }

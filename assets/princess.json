@@ -1,10 +1,7 @@
 {
 	"meta": {
 		"image": "princess.anim.png",
-		"size": {
-			"w": 779,
-			"h": 689
-		},
+		"size": {"w":1606,"h":1143},
 		"scale": "1"
 	},
 	"animations": {
@@ -18,108 +15,124 @@
 			"walk_0.png",
 			"walk_1.png",
 			"walk_2.png"
+		],
+		"attack": [
+			"attack_0.png",
+			"attack_1.png",
+			"attack_2.png"
+		],
+		"death": [
+			"death_0.png",
+			"death_1.png",
+			"death_2.png",
+			"death_3.png",
+			"death_4.png"
 		]
 	},
 	"frames": {
-		"idle.png": {
-			"frame": {
-				"x": 0,
-				"y": 0,
-				"w": 300,
-				"h": 376
-			},
+		"death_2.png":
+		{
+			"frame": {"x":0,"y":0,"w":324,"h":400},
 			"rotated": false,
 			"trimmed": true,
-			"spriteSourceSize": {
-				"x": 174,
-				"y": 0,
-				"w": 300,
-				"h": 376
-			},
-			"sourceSize": {
-				"w": 600,
-				"h": 400
-			}
+			"spriteSourceSize": {"x":175,"y":0,"w":324,"h":400},
+			"sourceSize": {"w":600,"h":400}
 		},
-		"walk_1.png": {
-			"frame": {
-				"x": 300,
-				"y": 0,
-				"w": 233,
-				"h": 367
-			},
+		"death_0.png":
+		{
+			"frame": {"x":324,"y":0,"w":252,"h":398},
 			"rotated": false,
 			"trimmed": true,
-			"spriteSourceSize": {
-				"x": 182,
-				"y": 16,
-				"w": 233,
-				"h": 367
-			},
-			"sourceSize": {
-				"w": 600,
-				"h": 400
-			}
+			"spriteSourceSize": {"x":62,"y":0,"w":252,"h":398},
+			"sourceSize": {"w":600,"h":400}
 		},
-		"walk_2.png": {
-			"frame": {
-				"x": 533,
-				"y": 0,
-				"w": 246,
-				"h": 355
-			},
+		"attack_0.png":
+		{
+			"frame": {"x":576,"y":0,"w":346,"h":378},
 			"rotated": false,
 			"trimmed": true,
-			"spriteSourceSize": {
-				"x": 184,
-				"y": 22,
-				"w": 246,
-				"h": 355
-			},
-			"sourceSize": {
-				"w": 600,
-				"h": 400
-			}
+			"spriteSourceSize": {"x":36,"y":17,"w":346,"h":378},
+			"sourceSize": {"w":600,"h":400}
 		},
-		"fart_0.png": {
-			"frame": {
-				"x": 0,
-				"y": 376,
-				"w": 257,
-				"h": 313
-			},
+		"idle.png":
+		{
+			"frame": {"x":0,"y":400,"w":300,"h":376},
 			"rotated": false,
 			"trimmed": true,
-			"spriteSourceSize": {
-				"x": 78,
-				"y": 35,
-				"w": 257,
-				"h": 313
-			},
-			"sourceSize": {
-				"w": 600,
-				"h": 400
-			}
+			"spriteSourceSize": {"x":174,"y":0,"w":300,"h":376},
+			"sourceSize": {"w":600,"h":400}
 		},
-		"walk_0.png": {
-			"frame": {
-				"x": 257,
-				"y": 376,
-				"w": 220,
-				"h": 308
-			},
+		"attack_2.png":
+		{
+			"frame": {"x":300,"y":400,"w":375,"h":285},
 			"rotated": false,
 			"trimmed": true,
-			"spriteSourceSize": {
-				"x": 172,
-				"y": 30,
-				"w": 220,
-				"h": 308
-			},
-			"sourceSize": {
-				"w": 600,
-				"h": 400
-			}
+			"spriteSourceSize": {"x":24,"y":69,"w":375,"h":285},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"attack_1.png":
+		{
+			"frame": {"x":922,"y":0,"w":370,"h":286},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":21,"y":98,"w":370,"h":286},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"death_1.png":
+		{
+			"frame": {"x":922,"y":286,"w":296,"h":368},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":6,"y":0,"w":296,"h":368},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_1.png":
+		{
+			"frame": {"x":0,"y":776,"w":233,"h":367},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":182,"y":16,"w":233,"h":367},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_2.png":
+		{
+			"frame": {"x":233,"y":776,"w":246,"h":355},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":184,"y":22,"w":246,"h":355},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"death_3.png":
+		{
+			"frame": {"x":479,"y":776,"w":348,"h":312},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":179,"y":39,"w":348,"h":312},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"death_4.png":
+		{
+			"frame": {"x":1292,"y":0,"w":314,"h":321},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":162,"y":42,"w":314,"h":321},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"fart_0.png":
+		{
+			"frame": {"x":1292,"y":321,"w":257,"h":313},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":78,"y":35,"w":257,"h":313},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_0.png":
+		{
+			"frame": {"x":1292,"y":634,"w":220,"h":308},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":172,"y":30,"w":220,"h":308},
+			"sourceSize": {"w":600,"h":400}
 		}
 	}
 }
