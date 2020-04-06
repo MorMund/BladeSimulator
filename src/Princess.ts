@@ -1,9 +1,9 @@
 import { Spritesheet, AnimatedSprite, Container, Point } from "pixi.js";
-import { toFullLoopAnim, getCenter, getAngleBetweenPoints } from "./utils";
+import { toFullLoopAnim, getCenter, getAngleBetweenPoints, getDistance } from "./utils";
 import { Entity } from "./Entity";
 
 
-const maxHP = 5000;
+const maxHP = 10000;
 
 export class Princess extends Entity {
     private animations = new Map<string, AnimatedSprite>();
@@ -13,7 +13,7 @@ export class Princess extends Entity {
     private isAttacking = false;
     private movementSpeed = 1;
     private isDead = false;
-    private looted = false;
+    private wasAttacked = false;
 
     private onLooted: () => void;
 
@@ -34,7 +34,7 @@ export class Princess extends Entity {
             this.container.addChild(element);
         });
 
-        this.selectAnimation("walk");
+        this.selectAnimation("idle");
         this.animations.get("death").loop = false;
         this.animations.get("attack").onLoop = () => {
             this.isAttacking = false;
@@ -61,6 +61,7 @@ export class Princess extends Entity {
     }
 
     public damage(damage: number): void {
+        this.wasAttacked = true;
         this.health -= damage;
         if (this.health <= 0) {
             this.isDead = true;
@@ -72,7 +73,6 @@ export class Princess extends Entity {
             this.container.on("pointerdown", () => {
                 this.container.buttonMode = false;
                 this.container.interactive = false;
-                this.looted = true;
                 this.onLooted();
                 this.kill();
             });
@@ -88,7 +88,7 @@ export class Princess extends Entity {
     }
 
     public update(delta: number): void {
-        if (this.isDead) {
+        if (this.isDead || !this.wasAttacked) {
             return;
         }
 
@@ -97,9 +97,7 @@ export class Princess extends Entity {
             const targetCenter = getCenter(this.target.getContainer().getBounds());
             const selfCenter = getCenter(this.container.getBounds());
 
-            const distX = selfCenter.x - targetCenter.x;
-            const distY = selfCenter.y - targetCenter.y;
-            const distance = Math.sqrt((distX * distX) + (distY * distY));
+            const distance = getDistance(selfCenter, targetCenter);
 
             this.container.rotation = getAngleBetweenPoints(targetCenter, selfCenter);
             if (distance > 50) {

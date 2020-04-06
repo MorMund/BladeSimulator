@@ -4,14 +4,25 @@ import * as gnomeAnim from "../assets/gnome.json";
 import * as princessSheet from "../assets/princess.png";
 import * as gnomeSheet from "../assets/gnome.png";
 import { Princess } from "./Princess";
-import { Application, Spritesheet, Sprite } from "pixi.js";
+import { Application, Spritesheet, Sprite, Point, Graphics } from "pixi.js";
 import { Gnome, Movement } from "./Gnome";
 import { Entity } from "./Entity";
+import { getCenter, getDistance, getAngleBetweenPoints } from "./utils";
 
 const app = new Application({ width: 800, height: 800, backgroundColor: 0x1099bb });
 document.body.appendChild(app.view);
 
 const downKeys = new Set<String>();
+const arenaCenter = new Point(380,400);
+const arenaRadius = 350;
+const graphics = new Graphics();
+
+// Circle
+graphics.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
+graphics.beginFill(0xDE3249, 0.2);
+graphics.drawCircle(arenaCenter.x, arenaCenter.y, arenaRadius);
+graphics.endFill();
+
 let princess: Princess;
 let gnome: Gnome;
 const entities = new Set<Entity>();
@@ -63,10 +74,12 @@ app.loader
             princess = new Princess(princessSheet);
             addEntity(princess);
             princess.setOnLooted(showLootWindow);
+            princess.getContainer().position = new Point(400,400);
         });
         gnomeSheet.parse(() => {
             gnome = new Gnome(gnomeSheet, addEntity);
             addEntity(gnome);
+            gnome.getContainer().position = new Point(600,200);
         });
     });
 
@@ -75,7 +88,7 @@ bg.width = app.screen.width;
 bg.height = app.screen.height;
 
 app.stage.addChild(bg);
-
+app.stage.addChild(graphics);
 app.ticker.add((delta) => {
     if (gnome !== undefined) {
         let move = Movement.None;
@@ -106,6 +119,13 @@ app.ticker.add((delta) => {
             castbar.container.style.visibility = "";
             castbar.bar.style.width = `${cast.castTime / cast.spellCastTime * 100}%`;
             castbar.text.innerHTML = cast.name;
+        }
+
+        const gnomeCenter = getCenter(gnome.getContainer().getBounds());
+        const distance = getDistance(gnomeCenter, arenaCenter);
+        if(distance > arenaRadius) {
+            const angle = getAngleBetweenPoints(gnomeCenter, arenaCenter);
+            gnome.forceMove(arenaCenter, arenaRadius, angle);
         }
     }
 

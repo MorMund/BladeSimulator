@@ -5,6 +5,12 @@ export function toFullLoopAnim(animation: Array<any>): AnimatedSprite {
     return new AnimatedSprite(animation.concat(loopBack));
 }
 
+export function getDistance(p1: Point, p2: Point): number {
+    const distX = p1.x - p2.x;
+    const distY = p1.y - p2.y;
+    return Math.sqrt((distX * distX) + (distY * distY));
+}
+
 export function getAngleBetweenPoints2(x1: number, x2: number, y1: number, y2: number): number {
     return Math.atan2(y2 - y1, x2 - x1);
 }

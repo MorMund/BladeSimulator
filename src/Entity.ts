@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container, Point } from "pixi.js";
 
 export abstract class Entity {
     private onDeath = new Set<(entity: Entity) => void>();
@@ -18,7 +18,7 @@ export abstract class Entity {
         this.onDeath = null;
     }
 
-    protected moveInDirection(distance: number, delta: number) {
+    protected moveInDirection(distance: number, delta: number): void {
         const directionX = Math.cos(this.getContainer().rotation);
         const directionY = Math.sin(this.getContainer().rotation);
 
@@ -30,8 +30,17 @@ export abstract class Entity {
 
         this.getContainer().position.x = posX + deltaX;
         this.getContainer().position.y = posY + deltaY;
+    }
 
-        const posXA = this.getContainer().x;
-        const posYA = this.getContainer().y;
+    // for restricting movement in arena
+    public forceMove(center: Point, distance: number, angle: number): void {
+        const directionX = Math.cos(angle);
+        const directionY = Math.sin(angle);
+
+        const deltaX = directionX * -distance;
+        const deltaY = directionY * -distance;
+
+        this.getContainer().position.x = center.x + deltaX;
+        this.getContainer().position.y = center.y + deltaY;
     }
 }

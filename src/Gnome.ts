@@ -70,7 +70,7 @@ export class Gnome extends Entity {
         this.selectAnimation("idle");
 
         const spellList: Array<Spell> = [
-            { name: "Fireball", castTime: 2, damage: 5000, damageVariance: 500, cooldown: 0 },
+            { name: "Fireball", castTime: 2, damage: 1000, damageVariance: 500, cooldown: 0 },
             { name: "Blink", castTime: 0, damage: 0, damageVariance: 0, cooldown: 15 },
             { name: "Fire Blast", castTime: 0, damage: 700, damageVariance: 300, cooldown: 8 },
             { name: "Scorch", castTime: 1.5, damage: 700, damageVariance: 300, cooldown: 0 },
