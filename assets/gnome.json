@@ -1,0 +1,104 @@
+{
+	"meta": {
+		"image": "gnome.anim.png",
+		"size": {"w":1657,"h":1550},
+		"scale": "1"
+	},
+	"animations":{
+		"cast":["cast_0.png", "cast_1.png", "cast_2.png"],
+		"walk":["walk_0.png", "walk_1.png", "walk_2.png"],
+		"walk_b":["walk_b_0.png", "walk_b_1.png", "walk_b_2.png"],
+		"cast_i": ["cast_i_0.png"],
+		"idle": ["idle_0.png"]
+	},
+	"frames": {
+		"cast_0.png":
+		{
+			"frame": {"x":0,"y":0,"w":416,"h":282},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":41,"y":85,"w":416,"h":282},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"cast_1.png":
+		{
+			"frame": {"x":416,"y":0,"w":414,"h":282},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":41,"y":85,"w":414,"h":282},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"cast_2.png":
+		{
+			"frame": {"x":0,"y":282,"w":409,"h":268},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":37,"y":92,"w":409,"h":268},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"idle_0.png":
+		{
+			"frame": {"x":830,"y":0,"w":285,"h":377},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":115,"y":10,"w":285,"h":377},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"cast_i_0.png":
+		{
+			"frame": {"x":0,"y":550,"w":377,"h":282},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":62,"y":87,"w":377,"h":282},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_2.png":
+		{
+			"frame": {"x":1115,"y":0,"w":263,"h":375},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":139,"y":12,"w":263,"h":375},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_b_2.png":
+		{
+			"frame": {"x":0,"y":832,"w":370,"h":349},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":71,"y":19,"w":370,"h":349},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_b_0.png":
+		{
+			"frame": {"x":1378,"y":0,"w":279,"h":370},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":136,"y":21,"w":279,"h":370},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_b_1.png":
+		{
+			"frame": {"x":0,"y":1181,"w":284,"h":369},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":124,"y":8,"w":284,"h":369},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_1.png":
+		{
+			"frame": {"x":1378,"y":370,"w":265,"h":365},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":125,"y":10,"w":265,"h":365},
+			"sourceSize": {"w":600,"h":400}
+		},
+		"walk_0.png":
+		{
+			"frame": {"x":284,"y":1181,"w":325,"h":359},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":74,"y":33,"w":325,"h":359},
+			"sourceSize": {"w":600,"h":400}
+		}
+	}
+}

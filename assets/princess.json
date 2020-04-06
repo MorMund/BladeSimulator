@@ -1,0 +1,125 @@
+{
+	"meta": {
+		"image": "princess.anim.png",
+		"size": {
+			"w": 779,
+			"h": 689
+		},
+		"scale": "1"
+	},
+	"animations": {
+		"idle": [
+			"idle.png"
+		],
+		"fart": [
+			"fart_0.png"
+		],
+		"walk": [
+			"walk_0.png",
+			"walk_1.png",
+			"walk_2.png"
+		]
+	},
+	"frames": {
+		"idle.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 376
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 174,
+				"y": 0,
+				"w": 300,
+				"h": 376
+			},
+			"sourceSize": {
+				"w": 600,
+				"h": 400
+			}
+		},
+		"walk_1.png": {
+			"frame": {
+				"x": 300,
+				"y": 0,
+				"w": 233,
+				"h": 367
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 182,
+				"y": 16,
+				"w": 233,
+				"h": 367
+			},
+			"sourceSize": {
+				"w": 600,
+				"h": 400
+			}
+		},
+		"walk_2.png": {
+			"frame": {
+				"x": 533,
+				"y": 0,
+				"w": 246,
+				"h": 355
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 184,
+				"y": 22,
+				"w": 246,
+				"h": 355
+			},
+			"sourceSize": {
+				"w": 600,
+				"h": 400
+			}
+		},
+		"fart_0.png": {
+			"frame": {
+				"x": 0,
+				"y": 376,
+				"w": 257,
+				"h": 313
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 78,
+				"y": 35,
+				"w": 257,
+				"h": 313
+			},
+			"sourceSize": {
+				"w": 600,
+				"h": 400
+			}
+		},
+		"walk_0.png": {
+			"frame": {
+				"x": 257,
+				"y": 376,
+				"w": 220,
+				"h": 308
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 172,
+				"y": 30,
+				"w": 220,
+				"h": 308
+			},
+			"sourceSize": {
+				"w": 600,
+				"h": 400
+			}
+		}
+	}
+}
