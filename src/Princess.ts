@@ -12,16 +12,20 @@ export class Princess extends Entity {
     private health = maxHP;
     private isAttacking = false;
     private movementSpeed = 1;
+    private isDead = false;
+    private looted = false;
+
+    private onLooted: () => void;
 
     constructor(spritesheet: Spritesheet) {
         super();
         this.container = new Container();
         this.container.scale = new Point(0.2, 0.2);
-        this.animations.set("walk",  toFullLoopAnim(spritesheet.animations.walk));
+        this.animations.set("walk", toFullLoopAnim(spritesheet.animations.walk));
         this.animations.set("attack", toFullLoopAnim(spritesheet.animations.attack));
         this.animations.set("fart", new AnimatedSprite(spritesheet.animations.fart));
         this.animations.set("idle", new AnimatedSprite(spritesheet.animations.idle));
-        this.animations.set("death",  new AnimatedSprite(spritesheet.animations.death));
+        this.animations.set("death", new AnimatedSprite(spritesheet.animations.death));
         this.animations.forEach(element => {
             element.animationSpeed = 0.05;
             element.anchor.set(0.5);
@@ -31,9 +35,10 @@ export class Princess extends Entity {
         });
 
         this.selectAnimation("walk");
+        this.animations.get("death").loop = false;
         this.animations.get("attack").onLoop = () => {
             this.isAttacking = false;
-            const attackAnim =  this.animations.get("attack");
+            const attackAnim = this.animations.get("attack");
             attackAnim.stop();
             this.target.damage(300);
         };
@@ -51,9 +56,27 @@ export class Princess extends Entity {
         this.target = target;
     }
 
+    public setOnLooted(callback: () => void): void {
+        this.onLooted = callback;
+    }
+
     public damage(damage: number): void {
         this.health -= damage;
-        console.log("Boss Health: " + this.health);
+        if (this.health <= 0) {
+            this.isDead = true;
+            this.health = 0;
+            this.selectAnimation("death");
+
+            this.container.buttonMode = true;
+            this.container.interactive = true;
+            this.container.on("pointerdown", () => {
+                this.container.buttonMode = false;
+                this.container.interactive = false;
+                this.looted = true;
+                this.onLooted();
+                this.kill();
+            });
+        }
     }
 
     public getHealth(): number {
@@ -65,7 +88,11 @@ export class Princess extends Entity {
     }
 
     public update(delta: number): void {
-        if(this.target !== undefined && !this.isAttacking) {
+        if (this.isDead) {
+            return;
+        }
+
+        if (this.target !== undefined && !this.isAttacking) {
             this.selectAnimation("walk");
             const targetCenter = getCenter(this.target.getContainer().getBounds());
             const selfCenter = getCenter(this.container.getBounds());
@@ -75,11 +102,11 @@ export class Princess extends Entity {
             const distance = Math.sqrt((distX * distX) + (distY * distY));
 
             this.container.rotation = getAngleBetweenPoints(targetCenter, selfCenter);
-            if(distance > 50) {
+            if (distance > 50) {
                 this.moveInDirection(this.movementSpeed, delta);
             } else {
                 this.isAttacking = true;
-                const attackAnim =  this.animations.get("attack");
+                const attackAnim = this.animations.get("attack");
                 attackAnim.play();
                 this.selectAnimation("attack");
             }

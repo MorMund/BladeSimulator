@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
+  <script>var whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
+  <script src="https://wow.zamimg.com/widgets/power.js"></script>
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 
@@ -46,6 +48,11 @@
       <div class="skill-button"><img id="pyro-action"><span class="skill-text">X</span></div>
     </div>
   </div>
+  <div id="loot-window" class="ui-element loot-window" style="visibility: hidden;">
+    <p style="color: white; padding: 1px; margin: 5px;">Loot</p>
+    <div id="loot-list" style="display: block;">
+    </div>
+  </div>
   <my-app></my-app>
   <style>
     .ui-overlay {
@@ -62,6 +69,22 @@
       text-align: center;
       color: whitesmoke;
       text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    }
+
+    .loot-window {
+      left: 300px;
+      top: 400px;
+      height: 200px;
+      background-color: #111111CC;
+      backdrop-filter: blur(5px);
+      padding: 10px;
+    }
+
+    .loot-item {
+      background-color: black !important;
+      padding: 5px;
+      margin: 5px;
+      display: block;
     }
 
     .skill-button {

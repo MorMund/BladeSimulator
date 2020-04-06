@@ -37,6 +37,11 @@ const castbar = {
     text: document.getElementById("cast-text")
 };
 
+const lootWindow = document.getElementById("loot-window");
+const lootList= document.getElementById("loot-list");
+
+const lootTable = import("../assets/drops.json") as any as Promise<Array<{URL: string, drops: number, chance: number}>>;
+
 function entityDeath(entity: Entity): void {
     app.stage.removeChild(entity.getContainer());
     entities.delete(entity);
@@ -57,6 +62,7 @@ app.loader
         princessSheet.parse(() => {
             princess = new Princess(princessSheet);
             addEntity(princess);
+            princess.setOnLooted(showLootWindow);
         });
         gnomeSheet.parse(() => {
             gnome = new Gnome(gnomeSheet, addEntity);
@@ -88,7 +94,7 @@ app.ticker.add((delta) => {
         gnome.move(move);
 
         playerHealthUI.bar.style.width = `${gnome.getHealth() / gnome.getMaxHealth() * 100}%`;
-        playerHealthUI.text.innerHTML = `${gnome.getHealth()}/${gnome.getMaxHealth()}`;
+        playerHealthUI.text.innerHTML = `${gnome.getHealth().toFixed(0)}/${gnome.getMaxHealth()}`;
         const blinkCD = gnome.getCooldowns().get("Blink");
         const blastCD = gnome.getCooldowns().get("Fire Blast");
         cooldowns.blink.innerHTML = !!blinkCD ? blinkCD.toFixed(1) : "";
@@ -105,7 +111,7 @@ app.ticker.add((delta) => {
 
     if (princess !== undefined) {
         enemyHealthUI.bar.style.width = `${princess.getHealth() / princess.getMaxHealth() * 100}%`;
-        enemyHealthUI.text.innerHTML = `${princess.getHealth()}/${princess.getMaxHealth()}`;
+        enemyHealthUI.text.innerHTML = `${princess.getHealth().toFixed(0)}/${princess.getMaxHealth()}`;
     }
 
     entities.forEach((entity) => entity.update(delta, app.ticker.deltaMS / 1000));
@@ -141,6 +147,10 @@ document.addEventListener("keypress", (ev) => {
         gnome.cast("Pyroblast");
     } else if (ev.key === "q") {
         gnome.cast("Fireball");
+    } else if (ev.key === "w") {
+        gnome.cast("Scorch");
+    } else if (ev.key === "e") {
+        gnome.cast("Fire Blast");
     }
 });
 
@@ -161,4 +171,20 @@ async function setupUi() {
     (document.getElementById("pyro-action") as HTMLImageElement).src = (await pyro).default;
     (document.getElementById("scorch-action") as HTMLImageElement).src = (await scorch).default;
     (document.getElementById("fireblast-action") as HTMLImageElement).src = (await fireblast).default;
+}
+
+async function showLootWindow() {
+    lootWindow.style.visibility = "";
+    for (const item of await lootTable) {
+        const dropRNG = Math.random();
+        if(dropRNG < item.chance) {
+            console.log(item);
+            const element = document.createElement("a");
+            element.className = "loot-item";
+            element.href = item.URL;
+            console.log(element);
+            lootList.appendChild(element);
+            eval("$WowheadPower.refreshLinks()");
+        }
+    }
 }

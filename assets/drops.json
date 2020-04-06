@@ -1,0 +1,487 @@
+[
+    {
+        "URL": "https://classic.wowhead.com/item=17714/bracers-of-the-stone-princess",
+        "drops": 5719,
+        "chance": 0.217692513
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17713/blackstone-ring",
+        "drops": 5690,
+        "chance": 0.216588634
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17766/princess-theradras-scepter",
+        "drops": 4695,
+        "chance": 0.178714172
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17710/charstone-dirk",
+        "drops": 4639,
+        "chance": 0.176582543
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17707/gemshard-heart",
+        "drops": 4637,
+        "chance": 0.176506414
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17715/eye-of-theradras",
+        "drops": 4618,
+        "chance": 0.175783183
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17711/elemental-rockridge-leggings",
+        "drops": 4517,
+        "chance": 0.17193864
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=7912/solid-stone",
+        "drops": 4473,
+        "chance": 0.170263789
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=8150/deeprock-salt",
+        "drops": 3167,
+        "chance": 0.120551178
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=4552/smooth-stone-chip",
+        "drops": 1501,
+        "chance": 0.057135244
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=4554/shiny-polished-stone",
+        "drops": 660,
+        "chance": 0.025122759
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10243/heavy-lamellar-girdle",
+        "drops": 357,
+        "chance": 0.013589129
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9954/chieftains-leggings",
+        "drops": 323,
+        "chance": 0.012294926
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10185/swashbucklers-cape",
+        "drops": 321,
+        "chance": 0.012218796
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10061/duskwoven-turban",
+        "drops": 318,
+        "chance": 0.012104602
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10072/righteous-gloves",
+        "drops": 318,
+        "chance": 0.012104602
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10068/righteous-boots",
+        "drops": 317,
+        "chance": 0.012066537
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10132/revenant-helmet",
+        "drops": 314,
+        "chance": 0.011952343
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10239/heavy-lamellar-vambraces",
+        "drops": 311,
+        "chance": 0.011838149
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10062/duskwoven-gloves",
+        "drops": 307,
+        "chance": 0.011685889
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10075/righteous-spaulders",
+        "drops": 296,
+        "chance": 0.011267177
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10063/duskwoven-amice",
+        "drops": 295,
+        "chance": 0.011229112
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10134/revenant-shoulders",
+        "drops": 293,
+        "chance": 0.011152982
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10083/lords-crown",
+        "drops": 279,
+        "chance": 0.010620075
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17684/theradric-crystal-carving",
+        "drops": 273,
+        "chance": 0.010391687
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10191/crusaders-armguards",
+        "drops": 267,
+        "chance": 0.010163298
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9942/abjurers-pants",
+        "drops": 214,
+        "chance": 0.008145864
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9957/warmongers-chestpiece",
+        "drops": 185,
+        "chance": 0.007041985
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10058/duskwoven-sandals",
+        "drops": 179,
+        "chance": 0.006813597
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10131/revenant-boots",
+        "drops": 174,
+        "chance": 0.006623273
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9953/chieftains-headdress",
+        "drops": 170,
+        "chance": 0.006471014
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10238/heavy-lamellar-boots",
+        "drops": 167,
+        "chance": 0.006356819
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10208/overlords-legplates",
+        "drops": 166,
+        "chance": 0.006318755
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10203/overlords-chestplate",
+        "drops": 157,
+        "chance": 0.005976171
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10130/revenant-girdle",
+        "drops": 157,
+        "chance": 0.005976171
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9955/chieftains-shoulders",
+        "drops": 152,
+        "chance": 0.005785848
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10059/duskwoven-bracers",
+        "drops": 151,
+        "chance": 0.005747783
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=7517/gossamer-tunic",
+        "drops": 150,
+        "chance": 0.005709718
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=7527/cabalist-chestpiece",
+        "drops": 148,
+        "chance": 0.005633588
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10197/crusaders-belt",
+        "drops": 146,
+        "chance": 0.005557459
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10242/heavy-lamellar-gauntlets",
+        "drops": 146,
+        "chance": 0.005557459
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10081/lords-girdle",
+        "drops": 145,
+        "chance": 0.005519394
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10209/overlords-spaulders",
+        "drops": 145,
+        "chance": 0.005519394
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10133/revenant-leggings",
+        "drops": 143,
+        "chance": 0.005443264
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10080/lords-gauntlets",
+        "drops": 142,
+        "chance": 0.0054052
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10084/lords-legguards",
+        "drops": 141,
+        "chance": 0.005367135
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10184/swashbucklers-bracers",
+        "drops": 136,
+        "chance": 0.005176811
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10190/swashbucklers-belt",
+        "drops": 135,
+        "chance": 0.005138746
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10194/crusaders-cloak",
+        "drops": 135,
+        "chance": 0.005138746
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10174/mystical-cape",
+        "drops": 134,
+        "chance": 0.005100681
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10073/righteous-helmet",
+        "drops": 129,
+        "chance": 0.004910357
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10129/revenant-gauntlets",
+        "drops": 126,
+        "chance": 0.004796163
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9940/abjurers-hood",
+        "drops": 120,
+        "chance": 0.004567774
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10077/lords-breastplate",
+        "drops": 119,
+        "chance": 0.00452971
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10085/lords-pauldrons",
+        "drops": 117,
+        "chance": 0.00445358
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10180/mystical-belt",
+        "drops": 116,
+        "chance": 0.004415515
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10196/crusaders-gauntlets",
+        "drops": 105,
+        "chance": 0.003996803
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10098/councillors-cloak",
+        "drops": 99,
+        "chance": 0.003768414
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10173/mystical-bracers",
+        "drops": 99,
+        "chance": 0.003768414
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9943/abjurers-robe",
+        "drops": 96,
+        "chance": 0.003654219
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10241/heavy-lamellar-helm",
+        "drops": 96,
+        "chance": 0.003654219
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10082/lords-boots",
+        "drops": 95,
+        "chance": 0.003616155
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10186/swashbucklers-gloves",
+        "drops": 94,
+        "chance": 0.00357809
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10245/heavy-lamellar-pauldrons",
+        "drops": 93,
+        "chance": 0.003540025
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10120/ornate-cloak",
+        "drops": 91,
+        "chance": 0.003463896
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=9950/chieftains-breastplate",
+        "drops": 89,
+        "chance": 0.003387766
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10176/mystical-gloves",
+        "drops": 88,
+        "chance": 0.003349701
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10200/crusaders-pauldrons",
+        "drops": 86,
+        "chance": 0.003273572
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10064/duskwoven-pants",
+        "drops": 83,
+        "chance": 0.003159377
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10199/crusaders-leggings",
+        "drops": 82,
+        "chance": 0.003121312
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10108/wanderers-cloak",
+        "drops": 82,
+        "chance": 0.003121312
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10074/righteous-leggings",
+        "drops": 76,
+        "chance": 0.002892924
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10126/ornate-bracers",
+        "drops": 73,
+        "chance": 0.002778729
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10244/heavy-lamellar-leggings",
+        "drops": 71,
+        "chance": 0.0027026
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10198/crusaders-helm",
+        "drops": 70,
+        "chance": 0.002664535
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10171/templar-bracers",
+        "drops": 69,
+        "chance": 0.00262647
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10107/wanderers-bracers",
+        "drops": 68,
+        "chance": 0.002588405
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10103/councillors-sash",
+        "drops": 66,
+        "chance": 0.002512276
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10179/mystical-boots",
+        "drops": 65,
+        "chance": 0.002474211
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10128/revenant-chestplate",
+        "drops": 65,
+        "chance": 0.002474211
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=5758/mithril-lockbox",
+        "drops": 62,
+        "chance": 0.002360017
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10096/councillors-cuffs",
+        "drops": 60,
+        "chance": 0.002283887
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10166/templar-girdle",
+        "drops": 59,
+        "chance": 0.002245822
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13817/tapered-greatsword",
+        "drops": 58,
+        "chance": 0.002207758
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13821/bulky-maul",
+        "drops": 57,
+        "chance": 0.002169693
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10183/swashbucklers-boots",
+        "drops": 55,
+        "chance": 0.002093563
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=10109/wanderers-belt",
+        "drops": 55,
+        "chance": 0.002093563
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=3976/smooth-leather-armor",
+        "drops": 55,
+        "chance": 0.002093563
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13816/fine-longsword",
+        "drops": 53,
+        "chance": 0.002017434
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13823/stout-war-staff",
+        "drops": 53,
+        "chance": 0.002017434
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13819/balanced-war-axe",
+        "drops": 52,
+        "chance": 0.001979369
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13825/primed-musket",
+        "drops": 50,
+        "chance": 0.001903239
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=17780/blade-of-eternal-darkness",
+        "drops": 47,
+        "chance": 0.001789045
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13820/clout-mace",
+        "drops": 44,
+        "chance": 0.001674851
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=13822/spiked-dagger",
+        "drops": 39,
+        "chance": 0.001484527
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=7910/star-ruby",
+        "drops": 35,
+        "chance": 0.001332268
+    },
+    {
+        "URL": "https://classic.wowhead.com/item=14281/opulent-crown",
+        "drops": 25,
+        "chance": 0.00095162
+    }
+]

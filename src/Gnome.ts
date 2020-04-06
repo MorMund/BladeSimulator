@@ -41,6 +41,7 @@ export class Gnome extends Entity {
     private rotationSpeed = 5;
     private movementSpeed = 2;
     private blinkRange = 50;
+    private critChange = 0.2;
 
     constructor(spritesheet: Spritesheet, addEntity: (entity: Entity) => void) {
         super();
@@ -69,7 +70,7 @@ export class Gnome extends Entity {
         this.selectAnimation("idle");
 
         const spellList: Array<Spell> = [
-            { name: "Fireball", castTime: 2, damage: 1000, damageVariance: 500, cooldown: 0 },
+            { name: "Fireball", castTime: 2, damage: 5000, damageVariance: 500, cooldown: 0 },
             { name: "Blink", castTime: 0, damage: 0, damageVariance: 0, cooldown: 15 },
             { name: "Fire Blast", castTime: 0, damage: 700, damageVariance: 300, cooldown: 8 },
             { name: "Scorch", castTime: 1.5, damage: 700, damageVariance: 300, cooldown: 0 },
@@ -79,6 +80,7 @@ export class Gnome extends Entity {
         this.spells = new Map<SpellName, Spell>(spellList.map((spell) => [spell.name, spell]));
 
         this.fireballSprite = Sprite.from(fireballPath.default);
+        this.fireballSprite.scale.set(0.2);
     }
 
     public move(direction: Movement): void {
@@ -86,6 +88,10 @@ export class Gnome extends Entity {
     }
 
     public cast(spellName: SpellName): Boolean {
+        if(!!this.currentCast) {
+            return;
+        }
+
         let isSuccessful = true;
         if (this.currentGC !== 0) {
             isSuccessful = false;
@@ -150,17 +156,22 @@ export class Gnome extends Entity {
             cast.castTime = Math.max(0, cast.castTime - deltaS);
             if (cast.castTime === 0) {
                 this.currentCast = null;
+                const variance = (Math.random() - 0.5) * 2;
+                const critMultiply = (Math.random() < this.critChange) ? 2 : 1;
+                const castDamage = spell.damage + variance * spell.damageVariance * critMultiply;
                 if (spell.name === "Blink") {
                     this.moveInDirection(100, 1);
                 } else if (spell.name === "Fireball" || spell.name === "Pyroblast") {
                     this.addEntity(new Projectile({
                         target: this.target,
-                        damage: spell.damage,
+                        damage: castDamage,
                         origin: getCenter(this.container.getBounds()),
                         speed: 3,
                         sprite: this.fireballSprite
                     }
                     ));
+                } else if(spell.name === "Scorch" || spell.name === "Fire Blast") {
+                    this.target.damage(castDamage);
                 }
 
                 this.cooldowns.set(spell.name, spell.cooldown);
