@@ -2,11 +2,14 @@ import { Spritesheet, AnimatedSprite, Container, Point } from "pixi.js";
 import { toFullLoopAnim, getCenter, getAngleBetweenPoints } from "./utils";
 import { Entity } from "./Entity";
 
+
+const maxHP = 5000;
+
 export class Princess extends Entity {
     private animations = new Map<string, AnimatedSprite>();
     private container: Container;
     private target: Entity;
-    private health = 5000;
+    private health = maxHP;
     private isAttacking = false;
     private movementSpeed = 1;
 
@@ -51,6 +54,14 @@ export class Princess extends Entity {
     public damage(damage: number): void {
         this.health -= damage;
         console.log("Boss Health: " + this.health);
+    }
+
+    public getHealth(): number {
+        return this.health;
+    }
+
+    public getMaxHealth(): number {
+        return maxHP;
     }
 
     public update(delta: number): void {

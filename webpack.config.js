@@ -18,8 +18,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      hash: true,
+      minify: 'auto',
       title: 'My App',
-      template: 'assets/game.html'
+      template: './src/index.html'
     })
   ],
   module: {

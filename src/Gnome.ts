@@ -22,6 +22,8 @@ interface Spell {
 
 type SpellName = "Fireball" | "Pyroblast" | "Scorch" | "Fire Blast" | "Blink";
 
+const maxHP = 2000;
+
 export class Gnome extends Entity {
     private animations = new Map<string, AnimatedSprite>();
     private container: Container;
@@ -35,7 +37,7 @@ export class Gnome extends Entity {
     private addEntity: (entity: Entity) => void;
     private fireballSprite: Sprite;
 
-    private health = 2000;
+    private health = maxHP;
     private rotationSpeed = 5;
     private movementSpeed = 2;
     private blinkRange = 50;
@@ -113,6 +115,31 @@ export class Gnome extends Entity {
     public damage(damage: number): void {
         this.health -= damage;
         console.log("Player Health: " + this.health);
+    }
+
+    public getHealth(): number {
+        return this.health;
+    }
+
+    public getMaxHealth(): number {
+        return maxHP;
+    }
+
+    public getCooldowns(): Map<SpellName, number> {
+        return this.cooldowns;
+    }
+
+    public getCurrentCast(): {name: SpellName, castTime: number, spellCastTime: number} {
+        if(!this.currentCast) {
+            return undefined;
+        }
+
+        const spellcastTime = this.spells.get(this.currentCast.spell).castTime;
+        return {
+            name: this.currentCast.spell,
+            castTime: spellcastTime - this.currentCast.castTime,
+            spellCastTime: spellcastTime
+        };
     }
 
     public update(delta: number, deltaS: number): void {
