@@ -44,7 +44,15 @@ const castbar = {
 const lootWindow = document.getElementById("loot-window");
 const lootList= document.getElementById("loot-list");
 
+const deathWindow = document.getElementById("death-window");
+
 const lootTable = import("../assets/drops.json") as any as Promise<Array<{URL: string, drops: number, chance: number}>>;
+
+const retrybuttons = document.getElementsByClassName("retry-button");
+for (let index = 0; index < retrybuttons.length; index++) {
+    const element = retrybuttons[index] as HTMLButtonElement;
+    element.onclick = reset;
+}
 
 function entityDeath(entity: Entity): void {
     app.stage.removeChild(entity.getContainer());
@@ -57,22 +65,19 @@ function addEntity(entity: Entity): void {
     entity.addOnDeathListener(entityDeath);
 }
 
+let princessSheetRes: Spritesheet, gnomeSheetRes : Spritesheet;
+
 app.loader
     .add("princess", princessSheet.default)
     .add("gnome", gnomeSheet.default)
     .load((loader, resources) => {
-        const princessSheet = new Spritesheet(resources.princess.texture.baseTexture, princessAnim);
-        const gnomeSheet = new Spritesheet(resources.gnome.texture.baseTexture, gnomeAnim);
-        princessSheet.parse(() => {
-            princess = new Princess(princessSheet, addEntity);
-            addEntity(princess);
-            princess.setOnLooted(showLootWindow);
-            princess.getContainer().position = new Point(400,400);
+        princessSheetRes = new Spritesheet(resources.princess.texture.baseTexture, princessAnim);
+        gnomeSheetRes = new Spritesheet(resources.gnome.texture.baseTexture, gnomeAnim);
+        princessSheetRes.parse(() => {
+            createPrincess();
         });
-        gnomeSheet.parse(() => {
-            gnome = new Gnome(gnomeSheet, addEntity);
-            addEntity(gnome);
-            gnome.getContainer().position = new Point(600,200);
+        gnomeSheetRes.parse(() => {
+            createGnome();
         });
     });
 
@@ -84,6 +89,11 @@ app.stage.addChild(bg);
 
 app.ticker.add((delta) => {
     if (gnome !== undefined) {
+        if(gnome.getHealth() <= 0) {
+            deathWindow.style.visibility = "";
+            return;
+        }
+
         let move = Movement.None;
         if (downKeys.has("ArrowUp")) {
             move |= Movement.Forward;
@@ -197,7 +207,32 @@ async function showLootWindow() {
             element.href = item.URL;
             console.log(element);
             lootList.appendChild(element);
+            // tslint:disable-next-line: no-eval
             eval("$WowheadPower.refreshLinks()");
         }
     }
+}
+
+function reset() {
+    princess = undefined;
+    gnome = undefined;
+    entities.forEach((entity) => entity.kill());
+    createPrincess();
+    createGnome();
+    lootList.innerHTML = "";
+    lootWindow.style.visibility = "hidden";
+    deathWindow.style.visibility = "hidden";
+}
+
+function createPrincess(): void {
+    princess = new Princess(princessSheetRes, addEntity);
+    addEntity(princess);
+    princess.setOnLooted(showLootWindow);
+    princess.getContainer().position = new Point(400,400);
+}
+
+function createGnome(): void {
+    gnome = new Gnome(gnomeSheetRes, addEntity);
+    addEntity(gnome);
+    gnome.getContainer().position = new Point(600,200);
 }

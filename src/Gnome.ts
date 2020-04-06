@@ -132,6 +132,9 @@ export class Gnome extends Entity {
     public damage(damage: number, isCrit: boolean): void {
         this.health -= damage;
         this.addEntity(new DamageText(this, false, damage, isCrit));
+        if(this.health <= 0) {
+            this.health = 0;
+        }
     }
 
     public getHealth(): number {

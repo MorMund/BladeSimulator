@@ -39,7 +39,9 @@ export class Princess extends Entity {
 
         this.selectAnimation("idle");
         this.animations.get("death").loop = false;
-        this.animations.get("attack").onLoop = () => {
+        const attack = this.animations.get("attack")
+        attack.stop();
+        attack.onLoop = () => {
             this.isAttacking = false;
             const attackAnim = this.animations.get("attack");
             attackAnim.stop();
