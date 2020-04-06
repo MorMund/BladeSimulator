@@ -8,6 +8,7 @@ export interface IProjectileInfo {
     speed: number;
     sprite: Sprite;
     origin: Point;
+    isCrit: boolean;
 }
 
 export class Projectile extends Entity {
@@ -15,12 +16,14 @@ export class Projectile extends Entity {
     private target: Entity;
     private spellDamage: number;
     private speed: number;
+    private isCrit: boolean;
 
     constructor(params: IProjectileInfo) {
         super();
         this.sprite = params.sprite;
         this.target = params.target;
         this.speed = params.speed;
+        this.isCrit = params.isCrit;
         this.spellDamage = params.damage;
         this.sprite.anchor.set(0.5);
         this.sprite.x = params.origin.x;
@@ -47,7 +50,7 @@ export class Projectile extends Entity {
         if(distance > 10) {
             this.moveInDirection(this.speed, delta);
         } else {
-            this.target.damage(this.spellDamage);
+            this.target.damage(this.spellDamage, this.isCrit);
             this.kill();
         }
     }

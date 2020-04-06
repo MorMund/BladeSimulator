@@ -5,7 +5,7 @@ export abstract class Entity {
 
     abstract getContainer(): Container;
     abstract update(delta: number, deltaS: number): void;
-    abstract damage(damage: number): void;
+    abstract damage(damage: number, isCrit: boolean): void;
 
     public addOnDeathListener(handler: (entity: Entity) => void): void {
         this.onDeath.add(handler);

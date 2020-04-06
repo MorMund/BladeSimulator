@@ -2,6 +2,7 @@ import { AnimatedSprite, Container, Spritesheet, Point, Sprite } from "pixi.js";
 import { toFullLoopAnim, getCenter } from "./utils";
 import { Entity } from "./Entity";
 import { Projectile } from "./Projectile";
+import { DamageText } from "./DamageText";
 import * as fireballPath from "../assets/fireball.png";
 
 export enum Movement {
@@ -118,9 +119,9 @@ export class Gnome extends Entity {
         this.target = target;
     }
 
-    public damage(damage: number): void {
+    public damage(damage: number, isCrit: boolean): void {
         this.health -= damage;
-        console.log("Player Health: " + this.health);
+        this.addEntity(new DamageText(this, false, damage, isCrit));
     }
 
     public getHealth(): number {
@@ -157,7 +158,8 @@ export class Gnome extends Entity {
             if (cast.castTime === 0) {
                 this.currentCast = null;
                 const variance = (Math.random() - 0.5) * 2;
-                const critMultiply = (Math.random() < this.critChange) ? 2 : 1;
+                const isCrit = (Math.random() < this.critChange);
+                const critMultiply = isCrit ? 2 : 1;
                 const castDamage = spell.damage + variance * spell.damageVariance * critMultiply;
                 if (spell.name === "Blink") {
                     this.moveInDirection(100, 1);
@@ -167,11 +169,12 @@ export class Gnome extends Entity {
                         damage: castDamage,
                         origin: getCenter(this.container.getBounds()),
                         speed: 3,
-                        sprite: this.fireballSprite
+                        sprite: this.fireballSprite,
+                        isCrit: isCrit
                     }
                     ));
                 } else if(spell.name === "Scorch" || spell.name === "Fire Blast") {
-                    this.target.damage(castDamage);
+                    this.target.damage(castDamage, isCrit);
                 }
 
                 this.cooldowns.set(spell.name, spell.cooldown);

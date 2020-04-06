@@ -1,6 +1,7 @@
 import { Spritesheet, AnimatedSprite, Container, Point } from "pixi.js";
 import { toFullLoopAnim, getCenter, getAngleBetweenPoints, getDistance } from "./utils";
 import { Entity } from "./Entity";
+import { DamageText } from "./DamageText";
 
 
 const maxHP = 10000;
@@ -14,11 +15,13 @@ export class Princess extends Entity {
     private movementSpeed = 1;
     private isDead = false;
     private wasAttacked = false;
+    private addEntity: (entity: Entity) => void;
 
     private onLooted: () => void;
 
-    constructor(spritesheet: Spritesheet) {
+    constructor(spritesheet: Spritesheet, addEntity: (entity: Entity) => void) {
         super();
+        this.addEntity = addEntity;
         this.container = new Container();
         this.container.scale = new Point(0.2, 0.2);
         this.animations.set("walk", toFullLoopAnim(spritesheet.animations.walk));
@@ -40,7 +43,7 @@ export class Princess extends Entity {
             this.isAttacking = false;
             const attackAnim = this.animations.get("attack");
             attackAnim.stop();
-            this.target.damage(300);
+            this.target.damage(300 + (Math.random() * 200), false);
         };
     }
 
@@ -60,7 +63,8 @@ export class Princess extends Entity {
         this.onLooted = callback;
     }
 
-    public damage(damage: number): void {
+    public damage(damage: number, isCrit: boolean): void {
+        this.addEntity(new DamageText(this, true, damage, isCrit));
         this.wasAttacked = true;
         this.health -= damage;
         if (this.health <= 0) {

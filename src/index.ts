@@ -15,13 +15,6 @@ document.body.appendChild(app.view);
 const downKeys = new Set<String>();
 const arenaCenter = new Point(380,400);
 const arenaRadius = 350;
-const graphics = new Graphics();
-
-// Circle
-graphics.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
-graphics.beginFill(0xDE3249, 0.2);
-graphics.drawCircle(arenaCenter.x, arenaCenter.y, arenaRadius);
-graphics.endFill();
 
 let princess: Princess;
 let gnome: Gnome;
@@ -71,7 +64,7 @@ app.loader
         const princessSheet = new Spritesheet(resources.princess.texture.baseTexture, princessAnim);
         const gnomeSheet = new Spritesheet(resources.gnome.texture.baseTexture, gnomeAnim);
         princessSheet.parse(() => {
-            princess = new Princess(princessSheet);
+            princess = new Princess(princessSheet, addEntity);
             addEntity(princess);
             princess.setOnLooted(showLootWindow);
             princess.getContainer().position = new Point(400,400);
@@ -88,7 +81,7 @@ bg.width = app.screen.width;
 bg.height = app.screen.height;
 
 app.stage.addChild(bg);
-app.stage.addChild(graphics);
+
 app.ticker.add((delta) => {
     if (gnome !== undefined) {
         let move = Movement.None;
