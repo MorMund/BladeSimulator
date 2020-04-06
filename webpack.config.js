@@ -20,7 +20,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       minify: 'auto',
-      title: 'My App',
+      title: 'Farming Daggers KEKW',
       template: './src/index.html'
     })
   ],

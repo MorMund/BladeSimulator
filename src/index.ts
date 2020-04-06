@@ -13,11 +13,12 @@ const app = new Application({ width: 800, height: 800, backgroundColor: 0x1099bb
 document.body.appendChild(app.view);
 
 const downKeys = new Set<String>();
-const arenaCenter = new Point(380,400);
+const arenaCenter = new Point(380, 400);
 const arenaRadius = 350;
 
 let princess: Princess;
 let gnome: Gnome;
+
 const entities = new Set<Entity>();
 
 const playerHealthUI = {
@@ -42,11 +43,11 @@ const castbar = {
 };
 
 const lootWindow = document.getElementById("loot-window");
-const lootList= document.getElementById("loot-list");
+const lootList = document.getElementById("loot-list");
 
 const deathWindow = document.getElementById("death-window");
 
-const lootTable = import("../assets/drops.json") as any as Promise<Array<{URL: string, drops: number, chance: number}>>;
+const lootTable = import("../assets/drops.json") as any as Promise<Array<{ URL: string, drops: number, chance: number }>>;
 
 const retrybuttons = document.getElementsByClassName("retry-button");
 for (let index = 0; index < retrybuttons.length; index++) {
@@ -65,7 +66,7 @@ function addEntity(entity: Entity): void {
     entity.addOnDeathListener(entityDeath);
 }
 
-let princessSheetRes: Spritesheet, gnomeSheetRes : Spritesheet;
+let princessSheetRes: Spritesheet, gnomeSheetRes: Spritesheet;
 
 app.loader
     .add("princess", princessSheet.default)
@@ -89,7 +90,12 @@ app.stage.addChild(bg);
 
 app.ticker.add((delta) => {
     if (gnome !== undefined) {
-        if(gnome.getHealth() <= 0) {
+        if (gnome.getHealth() <= 0) {
+            if (deathWindow.style.visibility !== "") {
+                incrementStat("deaths");
+                updateStats();
+            }
+
             deathWindow.style.visibility = "";
             return;
         }
@@ -116,7 +122,7 @@ app.ticker.add((delta) => {
         cooldowns.blink.innerHTML = !!blinkCD ? blinkCD.toFixed(1) : "";
         cooldowns.blast.innerHTML = !!blastCD ? blastCD.toFixed(1) : "";
         const cast = gnome.getCurrentCast();
-        if(cast === undefined || cast.spellCastTime === 0) {
+        if (cast === undefined || cast.spellCastTime === 0) {
             castbar.container.style.visibility = "hidden";
         } else {
             castbar.container.style.visibility = "";
@@ -126,7 +132,7 @@ app.ticker.add((delta) => {
 
         const gnomeCenter = getCenter(gnome.getContainer().getBounds());
         const distance = getDistance(gnomeCenter, arenaCenter);
-        if(distance > arenaRadius) {
+        if (distance > arenaRadius) {
             const angle = getAngleBetweenPoints(gnomeCenter, arenaCenter);
             gnome.forceMove(arenaCenter, arenaRadius, angle);
         }
@@ -197,15 +203,20 @@ async function setupUi() {
 }
 
 async function showLootWindow() {
+    incrementStat("kills");
+    updateStats();
     lootWindow.style.visibility = "";
     for (const item of await lootTable) {
         const dropRNG = Math.random();
-        if(dropRNG < item.chance) {
-            console.log(item);
+        if (dropRNG < item.chance) {
+            if (item.URL === "https://classic.wowhead.com/item=17780/blade-of-eternal-darkness") {
+                incrementStat("drops");
+                updateStats();
+            }
+
             const element = document.createElement("a");
             element.className = "loot-item";
             element.href = item.URL;
-            console.log(element);
             lootList.appendChild(element);
             // tslint:disable-next-line: no-eval
             eval("$WowheadPower.refreshLinks()");
@@ -213,7 +224,7 @@ async function showLootWindow() {
     }
 }
 
-function reset() {
+function reset(): void {
     princess = undefined;
     gnome = undefined;
     entities.forEach((entity) => entity.kill());
@@ -228,11 +239,32 @@ function createPrincess(): void {
     princess = new Princess(princessSheetRes, addEntity);
     addEntity(princess);
     princess.setOnLooted(showLootWindow);
-    princess.getContainer().position = new Point(400,400);
+    princess.getContainer().position = new Point(400, 400);
 }
 
 function createGnome(): void {
     gnome = new Gnome(gnomeSheetRes, addEntity);
     addEntity(gnome);
-    gnome.getContainer().position = new Point(600,200);
+    gnome.getContainer().position = new Point(600, 200);
+}
+
+function incrementStat(stat: string): void {
+    let countStorage = window.localStorage.getItem(stat);
+    if(countStorage === undefined || countStorage === null) {
+        countStorage = "0";
+    }
+
+    let count = Number.parseInt(countStorage, 10);
+    if(count === undefined || count === null || count === NaN) {
+        count = 0;
+    }
+    count++;
+    window.localStorage.setItem(stat, count.toFixed(0));
+}
+
+function updateStats(): void {
+    const storage = window.localStorage;
+    document.getElementById("kill-count").innerHTML = storage.getItem("kills");
+    document.getElementById("dagger-count").innerHTML = storage.getItem("drops");
+    document.getElementById("death-count").innerHTML = storage.getItem("deaths");
 }
