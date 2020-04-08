@@ -203,14 +203,12 @@ async function setupUi() {
 }
 
 async function showLootWindow() {
-    const firstKill = getStat("kill") === 0;
     incrementStat("kills");
     updateStats();
     lootWindow.style.visibility = "";
     for (const item of await lootTable) {
         const dropRNG = Math.random();
-        if ((firstKill && item.URL === "https://classic.wowhead.com/item=17780/blade-of-eternal-darkness") ||
-            dropRNG < item.chance) {
+        if (dropRNG < item.chance) {
             if (item.URL === "https://classic.wowhead.com/item=17780/blade-of-eternal-darkness") {
                 incrementStat("drops");
                 updateStats();
