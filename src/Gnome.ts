@@ -179,7 +179,7 @@ export class Gnome extends Entity {
                 const variance = (Math.random() - 0.5) * 2;
                 const isCrit = (Math.random() < this.critChange);
                 const critMultiply = isCrit ? 2 : 1;
-                const castDamage = spell.damage + variance * spell.damageVariance * critMultiply;
+                const castDamage = (spell.damage + variance * spell.damageVariance) * critMultiply;
 
                 if (spell.name !== "Blink" && facingAngle > 1) {
                     this.currentCast = null;

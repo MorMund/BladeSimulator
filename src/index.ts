@@ -203,12 +203,14 @@ async function setupUi() {
 }
 
 async function showLootWindow() {
+    const firstKill = getStat("kill") === 0;
     incrementStat("kills");
     updateStats();
     lootWindow.style.visibility = "";
     for (const item of await lootTable) {
         const dropRNG = Math.random();
-        if (dropRNG < item.chance) {
+        if ((firstKill && item.URL === "https://classic.wowhead.com/item=17780/blade-of-eternal-darkness") ||
+            dropRNG < item.chance) {
             if (item.URL === "https://classic.wowhead.com/item=17780/blade-of-eternal-darkness") {
                 incrementStat("drops");
                 updateStats();
@@ -248,16 +250,21 @@ function createGnome(): void {
     gnome.getContainer().position = new Point(600, 200);
 }
 
-function incrementStat(stat: string): void {
+function getStat(stat: string) {
     let countStorage = window.localStorage.getItem(stat);
-    if(countStorage === undefined || countStorage === null) {
+    if (countStorage === undefined || countStorage === null) {
         countStorage = "0";
     }
 
     let count = Number.parseInt(countStorage, 10);
-    if(count === undefined || count === null || count === NaN) {
+    if (count === undefined || count === null || count === NaN) {
         count = 0;
     }
+    return count;
+}
+
+function incrementStat(stat: string): void {
+    let count = getStat(stat);
     count++;
     window.localStorage.setItem(stat, count.toFixed(0));
 }
